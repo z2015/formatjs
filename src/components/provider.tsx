@@ -132,15 +132,31 @@ export function createIntl(
   return {
     ...resolvedConfig,
     formatters,
-    formatNumber: formatNumber.bind(undefined, resolvedConfig, formatters),
+    formatNumber: formatNumber.bind(
+      undefined,
+      resolvedConfig,
+      formatters.getNumberFormat
+    ),
     formatRelativeTime: formatRelativeTime.bind(
       undefined,
       resolvedConfig,
-      formatters
+      formatters.getRelativeTimeFormat
     ),
-    formatDate: formatDate.bind(undefined, resolvedConfig, formatters),
-    formatTime: formatTime.bind(undefined, resolvedConfig, formatters),
-    formatPlural: formatPlural.bind(undefined, resolvedConfig, formatters),
+    formatDate: formatDate.bind(
+      undefined,
+      resolvedConfig,
+      formatters.getDateTimeFormat
+    ),
+    formatTime: formatTime.bind(
+      undefined,
+      resolvedConfig,
+      formatters.getDateTimeFormat
+    ),
+    formatPlural: formatPlural.bind(
+      undefined,
+      resolvedConfig,
+      formatters.getPluralRules
+    ),
     formatMessage: formatMessage.bind(undefined, resolvedConfig, formatters),
     formatHTMLMessage: formatHTMLMessage.bind(
       undefined,

@@ -99,7 +99,7 @@ export function formatDate(
     onError,
     timeZone,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError' | 'timeZone'>,
-  state: Formatters,
+  getDateTimeFormat: Formatters['getDateTimeFormat'],
   ...[value, options = {}]: Parameters<IntlFormatters['formatDate']>
 ) {
   const {format} = options;
@@ -114,7 +114,7 @@ export function formatDate(
   );
   const date = typeof value === 'string' ? new Date(value || 0) : value;
   try {
-    return state.getDateTimeFormat(locale, filteredOptions).format(date);
+    return getDateTimeFormat(locale, filteredOptions).format(date);
   } catch (e) {
     onError(createError('Error formatting date.', e));
   }
@@ -129,7 +129,7 @@ export function formatTime(
     onError,
     timeZone,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError' | 'timeZone'>,
-  state: Formatters,
+  getDateTimeFormat: Formatters['getDateTimeFormat'],
   ...[value, options = {}]: Parameters<IntlFormatters['formatTime']>
 ) {
   const {format} = options;
@@ -155,7 +155,7 @@ export function formatTime(
   const date = typeof value === 'string' ? new Date(value || 0) : value;
 
   try {
-    return state.getDateTimeFormat(locale, filteredOptions).format(date);
+    return getDateTimeFormat(locale, filteredOptions).format(date);
   } catch (e) {
     onError(createError('Error formatting time.', e));
   }
@@ -169,7 +169,7 @@ export function formatRelativeTime(
     formats,
     onError,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError'>,
-  state: Formatters,
+  getRelativeTimeFormat: Formatters['getRelativeTimeFormat'],
   ...[value, unit = 'second', options = {}]: Parameters<
     IntlFormatters['formatRelativeTime']
   >
@@ -184,9 +184,7 @@ export function formatRelativeTime(
     defaults as FormatRelativeTimeOptions
   );
   try {
-    return state
-      .getRelativeTimeFormat(locale, filteredOptions)
-      .format(value, unit);
+    return getRelativeTimeFormat(locale, filteredOptions).format(value, unit);
   } catch (e) {
     onError(createError('Error formatting relative time.', e));
   }
@@ -200,7 +198,7 @@ export function formatNumber(
     formats,
     onError,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError'>,
-  state: Formatters,
+  getNumberFormat: Formatters['getNumberFormat'],
   ...[value, options = {}]: Parameters<IntlFormatters['formatNumber']>
 ) {
   const {format} = options;
@@ -209,7 +207,7 @@ export function formatNumber(
   let filteredOptions = filterProps(options, NUMBER_FORMAT_OPTIONS, defaults);
 
   try {
-    return state.getNumberFormat(locale, filteredOptions).format(value);
+    return getNumberFormat(locale, filteredOptions).format(value);
   } catch (e) {
     onError(createError('Error formatting number.', e));
   }
@@ -219,13 +217,13 @@ export function formatNumber(
 
 export function formatPlural(
   {locale, onError}: Pick<IntlConfig, 'locale' | 'onError'>,
-  state: Formatters,
+  getPluralRules: Formatters['getPluralRules'],
   ...[value, options = {}]: Parameters<IntlFormatters['formatPlural']>
 ) {
   let filteredOptions = filterProps(options, PLURAL_FORMAT_OPTIONS);
 
   try {
-    return state.getPluralRules(locale, filteredOptions).select(value);
+    return getPluralRules(locale, filteredOptions).select(value);
   } catch (e) {
     onError(createError('Error formatting plural.', e));
   }
@@ -250,7 +248,7 @@ export function formatMessage(
     | 'defaultFormats'
     | 'onError'
   >,
-  state: Formatters,
+  formatters: Formatters,
   messageDescriptor?: MessageDescriptor,
   values?: Record<string, PrimitiveType>
 ): string;
@@ -271,7 +269,7 @@ export function formatMessage(
     | 'defaultFormats'
     | 'onError'
   >,
-  state: Formatters,
+  formatters: Formatters,
   messageDescriptor: MessageDescriptor = {id: ''},
   values: Record<
     string,
@@ -304,8 +302,8 @@ export function formatMessage(
 
   if (message) {
     try {
-      let formatter = state.getMessageFormat(message, locale, formats, {
-        formatters: state,
+      let formatter = formatters.getMessageFormat(message, locale, formats, {
+        formatters,
       });
 
       formattedMessageParts = formatter.formatXMLMessage(values);
@@ -337,7 +335,7 @@ export function formatMessage(
 
   if (!formattedMessageParts.length && defaultMessage) {
     try {
-      let formatter = state.getMessageFormat(
+      let formatter = formatters.getMessageFormat(
         defaultMessage,
         defaultLocale,
         defaultFormats
@@ -384,7 +382,7 @@ export function formatHTMLMessage(
     | 'defaultFormats'
     | 'onError'
   >,
-  state: Formatters,
+  formatters: Formatters,
   messageDescriptor: MessageDescriptor = {id: ''},
   rawValues: Record<string, PrimitiveType> = {}
 ) {
@@ -400,7 +398,7 @@ export function formatHTMLMessage(
     {}
   );
 
-  return formatMessage(config, state, messageDescriptor, escapedValues);
+  return formatMessage(config, formatters, messageDescriptor, escapedValues);
 }
 
 export const formatters = {
