@@ -132,3 +132,12 @@ export function createFormatters(cache: IntlCache = createIntlCache()) {
     getPluralRules: memoizeIntlConstructor(Intl.PluralRules, cache.pluralRules),
   };
 }
+
+export function prettyPrintMessageDescriptor(msg: Record<string, any>) {
+  return `Message descriptor:
+{
+${Object.keys(msg)
+  .map(k => `${k}: \`${msg[k]}\``)
+  .join(',\n')}
+}`;
+}

@@ -21,7 +21,12 @@ import {
   IntlFormatters,
 } from './types';
 
-import {createError, escape, filterProps} from './utils';
+import {
+  createError,
+  escape,
+  filterProps,
+  prettyPrintMessageDescriptor,
+} from './utils';
 import {IntlRelativeTimeFormatOptions} from '@formatjs/intl-relativetimeformat';
 import {LiteralElement, TYPE} from 'intl-messageformat-parser';
 import {FormatXMLElementFn, PrimitiveType} from 'intl-messageformat';
@@ -281,7 +286,12 @@ export function formatMessage(
   const {id, defaultMessage} = messageDescriptor;
 
   // `id` is a required field of a Message Descriptor.
-  invariant(id, '[React Intl] An `id` must be provided to format a message.');
+  invariant(
+    id,
+    `[React Intl] An 'id' must be provided to format a message. 
+${prettyPrintMessageDescriptor(messageDescriptor)}
+`
+  );
 
   const message = messages && messages[id];
   const hasValues = Object.keys(values).length > 0;
@@ -295,7 +305,8 @@ export function formatMessage(
     }
     invariant(
       val.length === 1 && val[0].type === TYPE.literal,
-      'Message has placeholders but no values was provided'
+      `Message has placeholders but no values was provided. 
+${prettyPrintMessageDescriptor(messageDescriptor)}`
     );
     return (val[0] as LiteralElement).value;
   }
@@ -312,8 +323,10 @@ export function formatMessage(
     } catch (e) {
       onError(
         createError(
-          `Error formatting message: "${id}" for locale: "${locale}"` +
-            (defaultMessage ? ', using default message as fallback.' : ''),
+          `Error formatting message: "${id}" for locale: "${locale}"
+${defaultMessage ? ', using default message as fallback.' : ''}
+${prettyPrintMessageDescriptor(messageDescriptor)}
+`,
           e
         )
       );
@@ -328,8 +341,11 @@ export function formatMessage(
     ) {
       onError(
         createError(
-          `Missing message: "${id}" for locale: "${locale}"` +
-            (defaultMessage ? ', using default message as fallback.' : '')
+          `Missing message: "${id}" for locale: "${locale}" ${
+            defaultMessage ? ', using default message as fallback.' : ''
+          }
+${prettyPrintMessageDescriptor(messageDescriptor)}
+`
         )
       );
     }
@@ -346,7 +362,12 @@ export function formatMessage(
       formattedMessageParts = formatter.formatXMLMessage(values);
     } catch (e) {
       onError(
-        createError(`Error formatting the default message for: "${id}"`, e)
+        createError(
+          `Error formatting the default message for: "${id}". 
+${prettyPrintMessageDescriptor(messageDescriptor)}
+        `,
+          e
+        )
       );
     }
   }
@@ -357,7 +378,9 @@ export function formatMessage(
         `Cannot format message: "${id}", ` +
           `using message ${
             message || defaultMessage ? 'source' : 'id'
-          } as fallback.`
+          } as fallback.
+${prettyPrintMessageDescriptor(messageDescriptor)}
+`
       )
     );
     if (typeof message === 'string') {

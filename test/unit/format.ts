@@ -824,7 +824,7 @@ describe('format API', () => {
 
         expect(config.onError).toHaveBeenCalledTimes(1);
         expect(config.onError).toHaveBeenCalledWith(
-          `[React Intl] Missing message: "${id}" for locale: "${locale}", using default message as fallback.`
+          /[React Intl] Missing message: "${id}" for locale: "${locale}", using default message as fallback./
         );
       });
 

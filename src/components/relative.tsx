@@ -83,7 +83,9 @@ function canIncrement(unit: Unit = 'second') {
 function verifyProps(updateIntervalInSeconds?: number, unit?: Unit) {
   invariant(
     !updateIntervalInSeconds || (updateIntervalInSeconds && canIncrement(unit)),
-    'Cannot schedule update with unit longer than hour'
+    `Cannot schedule update with unit longer than hour. 
+Update interval provider: ${updateIntervalInSeconds}
+Unit: ${unit}`
   );
 }
 
