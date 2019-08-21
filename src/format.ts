@@ -100,7 +100,8 @@ export function formatDate(
     timeZone,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError' | 'timeZone'>,
   getDateTimeFormat: Formatters['getDateTimeFormat'],
-  ...[value, options = {}]: Parameters<IntlFormatters['formatDate']>
+  value?: Parameters<IntlFormatters['formatDate']>[0],
+  options: Parameters<IntlFormatters['formatDate']>[1] = {}
 ) {
   const {format} = options;
   let defaults = {
@@ -130,7 +131,8 @@ export function formatTime(
     timeZone,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError' | 'timeZone'>,
   getDateTimeFormat: Formatters['getDateTimeFormat'],
-  ...[value, options = {}]: Parameters<IntlFormatters['formatTime']>
+  value?: Parameters<IntlFormatters['formatTime']>[0],
+  options: Parameters<IntlFormatters['formatTime']>[1] = {}
 ) {
   const {format} = options;
   let defaults = {
@@ -170,9 +172,9 @@ export function formatRelativeTime(
     onError,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError'>,
   getRelativeTimeFormat: Formatters['getRelativeTimeFormat'],
-  ...[value, unit = 'second', options = {}]: Parameters<
-    IntlFormatters['formatRelativeTime']
-  >
+  value: Parameters<IntlFormatters['formatRelativeTime']>[0],
+  unit: Parameters<IntlFormatters['formatRelativeTime']>[1] = 'second',
+  options: Parameters<IntlFormatters['formatRelativeTime']>[2] = {}
 ) {
   const {format} = options;
 
@@ -199,7 +201,8 @@ export function formatNumber(
     onError,
   }: Pick<IntlConfig, 'locale' | 'formats' | 'onError'>,
   getNumberFormat: Formatters['getNumberFormat'],
-  ...[value, options = {}]: Parameters<IntlFormatters['formatNumber']>
+  value: Parameters<IntlFormatters['formatNumber']>[0],
+  options: Parameters<IntlFormatters['formatNumber']>[1] = {}
 ) {
   const {format} = options;
   let defaults =
@@ -218,7 +221,8 @@ export function formatNumber(
 export function formatPlural(
   {locale, onError}: Pick<IntlConfig, 'locale' | 'onError'>,
   getPluralRules: Formatters['getPluralRules'],
-  ...[value, options = {}]: Parameters<IntlFormatters['formatPlural']>
+  value: Parameters<IntlFormatters['formatPlural']>[0],
+  options: Parameters<IntlFormatters['formatPlural']>[1] = {}
 ) {
   let filteredOptions = filterProps(options, PLURAL_FORMAT_OPTIONS);
 
