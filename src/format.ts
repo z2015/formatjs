@@ -310,7 +310,7 @@ export function formatMessage(
         formatters,
       });
 
-      formattedMessageParts = formatter.formatXMLMessage(values);
+      formattedMessageParts = formatter.formatHTMLMessage(values);
     } catch (e) {
       onError(
         createError(
@@ -345,7 +345,7 @@ export function formatMessage(
         defaultFormats
       );
 
-      formattedMessageParts = formatter.formatXMLMessage(values);
+      formattedMessageParts = formatter.formatHTMLMessage(values);
     } catch (e) {
       onError(
         createError(`Error formatting the default message for: "${id}"`, e)
