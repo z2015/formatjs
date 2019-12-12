@@ -1,36 +1,10 @@
-# API
+---
+id: api
+title: API
+sidebar_label: API
+---
 
 There are a few API layers that React Intl provides and is built on. When using React Intl you'll be interacting with its API (documented here) and its React [components][components].
-
-<!-- toc -->
-
-- [ECMAScript Internationalization API](#ecmascript-internationalization-api)
-- [FormatJS Internationalization Formatters](#formatjs-internationalization-formatters)
-- [React Intl API](#react-intl-api)
-  - [`defineMessages`](#definemessages)
-  - [Injection API](#injection-api)
-    - [`useIntl` hook](#useintl-hook)
-    - [`injectIntl` HOC](#injectintl-hoc)
-    - [`IntlShape`](#intlshape)
-    - [`createIntl`](#createintl)
-  - [Date Formatting APIs](#date-formatting-apis)
-    - [`formatDate`](#formatdate)
-    - [`formatTime`](#formattime)
-    - [`formatRelativeTime`](#formatrelativetime)
-  - [Number Formatting APIs](#number-formatting-apis)
-    - [`formatNumber`](#formatnumber)
-    - [`formatPlural`](#formatplural)
-  - [List Formatting APIs](#list-formatting-apis)
-    - [`formatList`](#formatlist)
-  - [String Formatting APIs](#string-formatting-apis)
-    - [Message Syntax](#message-syntax)
-    - [Message Descriptor](#message-descriptor)
-    - [Message Formatting Fallbacks](#message-formatting-fallbacks)
-    - [`formatMessage`](#formatmessage)
-    - [`formatHTMLMessage`](#formathtmlmessage)
-- [React Intl Components](#react-intl-components)
-
-<!-- tocstop -->
 
 ## ECMAScript Internationalization API
 

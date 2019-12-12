@@ -1,14 +1,10 @@
-# Advanced Usage
+---
+id: advanced-usage
+title: Advanced Usage
+sidebar_label: Advanced Usage
+---
 
 `react-intl` is optimized for both runtime & compile time rendering. Below are a few guidelines you can follow if you have a strict performance budget.
-
-<!-- toc -->
-
-- [Pre-parsing messages](#pre-parsing-messages)
-  - [Caveats](#caveats)
-- [Imperative APIs](#imperative-apis)
-
-<!-- tocstop -->
 
 ## Pre-parsing messages
 

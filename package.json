@@ -169,6 +169,7 @@
     "benchmark": "^2.1.0",
     "core-js": "^3.4.5",
     "cross-env": "^6.0.3",
+    "docusaurus-init": "^1.14.1",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",

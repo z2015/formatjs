@@ -1,3 +1,8 @@
+---
+id: readme
+title: README
+sidebar_label: README
+---
 # `react-intl` Documentation
 
 **Welcome to React Intl's docs! This is the place to find React Intl's docs for v3**. Feel free to open a pull request and contribute to the docs to make them better.

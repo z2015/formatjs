@@ -1,37 +1,8 @@
-# Getting Started
-
-<!-- toc -->
-
-- [Introduction](#introduction)
-  - [Intro Guides](#intro-guides)
-  - [Runtime Requirements](#runtime-requirements)
-    - [Browser](#browser)
-    - [Node.js](#nodejs)
-      - [full-icu](#full-icu)
-      - [DOMParser](#domparser)
-    - [React Native](#react-native)
-      - [React Native on iOS](#react-native-on-ios)
-  - [Stage-3 Intl Features](#stage-3-intl-features)
-  - [The `react-intl` Package](#the-react-intl-package)
-    - [Module Bundlers](#module-bundlers)
-  - [The React Intl Module](#the-react-intl-module)
-  - [Creating an I18n Context](#creating-an-i18n-context)
-  - [Formatting Data](#formatting-data)
-- [ESM Build](#esm-build)
-  - [Jest](#jest)
-  - [webpack](#webpack)
-- [Core Concepts](#core-concepts)
-- [Example Apps](#example-apps)
-- [API Reference](#api-reference)
-- [TypeScript Usage](#typescript-usage)
-- [Advanced Usage](#advanced-usage)
-- [Supported Tooling](#supported-tooling)
-  - [Message extraction](#message-extraction)
-  - [ESLint Plugin](#eslint-plugin)
-
-<!-- tocstop -->
-
-# Introduction
+---
+id: getting-started
+title: Getting Started
+sidebar_label: Getting Started
+---
 
 ## Intro Guides
 

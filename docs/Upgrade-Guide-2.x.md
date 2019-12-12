@@ -1,23 +1,8 @@
-# Upgrade Guide for `react-intl@2.x`
-
-<!-- toc -->
-
-- [Use React 0.14 or 15](#use-react-014-or-15)
-- [Update How Locale Data is Added](#update-how-locale-data-is-added)
-  - [Add Call to `addLocaleData()` in Browser](#add-call-to-addlocaledata-in-browser)
-- [Remove Intl Mixin](#remove-intl-mixin)
-  - [Update to `IntlProvider`](#update-to-intlprovider)
-  - [Update to `injectIntl()`](#update-to-injectintl)
-- [Change How Messages are Formatted](#change-how-messages-are-formatted)
-  - [Flatten `messages` Object](#flatten-messages-object)
-  - [Replace `getIntlMessage()` Calls with Message Descriptors](#replace-getintlmessage-calls-with-message-descriptors)
-  - [Update `formatMessage()` Calls](#update-formatmessage-calls)
-  - [Update `FormattedMessage` and `FormattedHTMLMessage` Instances](#update-formattedmessage-and-formattedhtmlmessage-instances)
-- [Update How Relative Times are Formatted](#update-how-relative-times-are-formatted)
-  - [Rename `FormattedRelative`'s `now` Prop to `initialNow`](#rename-formattedrelatives-now-prop-to-initialnow)
-  - [Merge `formatRelative()`'s Second and Third Arguments](#merge-formatrelatives-second-and-third-arguments)
-
-<!-- tocstop -->
+---
+id: upgrade-guide-2
+title: Upgrade Guide for 2.x
+sidebar_label: Upgrade Guide for 2.x
+---
 
 ## Use React 0.14 or 15
 

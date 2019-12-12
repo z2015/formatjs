@@ -1,37 +1,10 @@
-# Components
+---
+id: components
+title: Components
+sidebar_label: Components
+---
 
 React Intl has a set of React components that provide a declarative way to setup an i18n context and format dates, numbers, and strings for display in a web UI. The components render React elements by building on React Intl's imperative [API](./API.md).
-
-<!-- toc -->
-
-- [Why Components?](#why-components)
-- [Intl Provider Component](#intl-provider-component)
-  - [`IntlProvider`](#intlprovider)
-  - [`RawIntlProvider`](#rawintlprovider)
-    - [Dynamic Language Selection](#dynamic-language-selection)
-- [Date Formatting Components](#date-formatting-components)
-  - [`FormattedDate`](#formatteddate)
-  - [`FormattedDateParts`](#formatteddateparts)
-  - [`FormattedTime`](#formattedtime)
-  - [`FormattedTimeParts`](#formattedtimeparts)
-  - [`FormattedRelativeTime`](#formattedrelativetime)
-- [Number Formatting Components](#number-formatting-components)
-  - [`FormattedNumber`](#formattednumber)
-  - [`FormattedNumberParts`](#formattednumberparts)
-  - [`FormattedPlural`](#formattedplural)
-- [List Formatting Components](#list-formatting-components)
-  - [`FormattedList`](#formattedlist)
-- [String Formatting Components](#string-formatting-components)
-  - [Message Syntax](#message-syntax)
-  - [Message Descriptor](#message-descriptor)
-  - [Message Formatting Fallbacks](#message-formatting-fallbacks)
-  - [`FormattedMessage`](#formattedmessage)
-    - [Rich Text Formatting](#rich-text-formatting)
-    - [Caveats](#caveats)
-  - [`FormattedHTMLMessage`](#formattedhtmlmessage)
-  - [Using React-Intl with React Native](#using-react-intl-with-react-native)
-
-<!-- tocstop -->
 
 ## Why Components?
 

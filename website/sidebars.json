@@ -1,0 +1,10 @@
+{
+  "docs": {
+    "User Guide": ["getting-started", "testing", "advanced-usage"],
+    "Upgrade Guides": ["upgrade-guide-3", "upgrade-guide-2"]
+  },
+  "api": {
+    "Imperative API": ["api"],
+    "Components": ["components"]
+  }
+}

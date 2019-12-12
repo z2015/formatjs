@@ -1,27 +1,8 @@
-# Upgrade Guide for `react-intl@3.x`
-
-<!-- toc -->
-
-- [Breaking API Changes](#breaking-api-changes)
-- [Use React 16.3 and upwards](#use-react-163-and-upwards)
-- [Migrate withRef to forwardRef](#migrate-withref-to-forwardref)
-- [New useIntl hook as an alternative of injectIntl HOC](#new-useintl-hook-as-an-alternative-of-injectintl-hoc)
-- [Migrate to using native Intl APIs](#migrate-to-using-native-intl-apis)
-- [TypeScript Support](#typescript-support)
-- [FormattedRelativeTime](#formattedrelativetime)
-- [Enhanced `FormattedMessage` & `formatMessage` rich text formatting](#enhanced-formattedmessage--formatmessage-rich-text-formatting)
-  - [Before](#before)
-  - [After](#after)
-- [ESM Build](#esm-build)
-  - [Jest](#jest)
-  - [webpack](#webpack)
-- [Creating intl without using Provider](#creating-intl-without-using-provider)
-- [Message Format Syntax Changes](#message-format-syntax-changes)
-  - [Escape character has been changed to apostrophe (`'`).](#escape-character-has-been-changed-to-apostrophe-)
-  - [Placeholder argument syntax change](#placeholder-argument-syntax-change)
-- [Testing](#testing)
-
-<!-- tocstop -->
+---
+id: upgrade-guide-3
+title: Upgrade Guide for 3.x
+sidebar_label: Upgrade Guide for 3.x
+---
 
 ## Breaking API Changes
 
