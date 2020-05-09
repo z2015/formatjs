@@ -15,8 +15,6 @@
     "declarationMap": true,
     "sourceMap": true,
     "composite": true,
-    "jsx": "react",
-    // If a package choose to use Mocha, they will have to explicit declare in their tsconfig.json.
-    "types": ["node", "jest"],
+    "jsx": "react"
   },
 }
