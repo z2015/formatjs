@@ -3,13 +3,13 @@ load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
 
 pkg_npm(
-    name="@formatjs/intl-utils",
+    name="intl-utils",
     srcs=["package.json"],
-    deps=[":intl-utils"]
+    deps=[":intl-utils-lib"]
 )
 
 ts_library(
-    name = "intl-utils",
+    name = "intl-utils-lib",
     srcs = glob(["src/*.ts"]),
     module_root="src",
     module_name="@formatjs/intl-utils",
