@@ -3,13 +3,13 @@
  * Copyrights licensed under the New BSD License.
  * See the accompanying LICENSE file for terms.
  */
-import extractRelativeFields from './extract-relative';
-import extractListPatterns from './extract-list';
-import extractNumbers from './extract-numbers';
-import extractUnits from './extract-units';
-import extractCurrencies from './extract-currencies';
-import extractDisplayNames from './extract-displaynames';
-import {getAllLocales} from './locales';
+import extractRelativeFields from './src/extract-relative';
+import extractListPatterns from './src/extract-list';
+import extractNumbers from './src/extract-numbers';
+import extractUnits from './src/extract-units';
+import extractCurrencies from './src/extract-currencies';
+import extractDisplayNames from './src/extract-displaynames';
+import {getAllLocales} from './src/locales';
 export const locales = getAllLocales();
 export interface Opts {
   locales?: string[];
@@ -39,18 +39,18 @@ export function extractAllDisplayNames(options: Opts = {}) {
   return extractDisplayNames(options.locales || locales);
 }
 
-export {getAllLanguages} from './locales';
+export {getAllLanguages} from './src/locales';
 
 export const processAliases = process;
-export {getAllLocales as getAllDateFieldsLocales} from './extract-relative';
-export {getAllLocales as getAllListLocales} from './extract-list';
+export {getAllLocales as getAllDateFieldsLocales} from './src/extract-relative';
+export {getAllLocales as getAllListLocales} from './src/extract-list';
 export {
   extractCurrencyDigits,
   generateDataForLocales as generateCurrencyDataForLocales,
-} from './extract-currencies';
-export {generateDataForLocales as generateUnitDataForLocales} from './extract-units';
+} from './src/extract-currencies';
+export {generateDataForLocales as generateUnitDataForLocales} from './src/extract-units';
 export {
   extractNumberingSystemNames,
   generateDataForLocales as generateNumberDataForLocales,
-} from './extract-numbers';
-export {getAllLocales as getAllDisplayNamesLocales} from './extract-displaynames';
+} from './src/extract-numbers';
+export {getAllLocales as getAllDisplayNamesLocales} from './src/extract-displaynames';

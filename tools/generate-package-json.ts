@@ -5,6 +5,7 @@ function main(args: Record<string, string>) {
     const json = readJSONSync(args.template)
     json.name = args.name
     json.description = args.description
+    json.license = args.license
     outputJSONSync(args.out, json, {
         spaces: 2
     })

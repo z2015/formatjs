@@ -14,14 +14,15 @@ SRCS = [
 pkg_npm(
     name = "intl-utils",
     deps = [
+        "LICENSE.md",
         "intl-utils.d.ts",
         "package.json",
-        ":intl-utils-lib",
+        ":lib",
     ],
 )
 
 ts_library(
-    name = "intl-utils-lib",
+    name = "lib",
     srcs = SRCS,
     devmode_module = "commonjs",
     module_name = "@formatjs/intl-utils",
@@ -57,7 +58,7 @@ jest_test(
 genrule(
     name = "intl-utils-d-ts",
     srcs = [
-        ":intl-utils-lib",
+        ":lib",
         "tsconfig.json",
         "api-extractor.json",
         "package.json",

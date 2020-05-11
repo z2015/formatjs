@@ -5,7 +5,7 @@ def _generate_package_json(ctx):
     args.add("--name", ctx.attr.module_name)
     args.add("--out", ctx.outputs.out)
     args.add("--description", ctx.attr.description)
-
+    args.add("--license", ctx.attr.license)
     ctx.actions.run(
         outputs = [ctx.outputs.out],
         inputs = ctx.attr._template.files,
@@ -22,6 +22,7 @@ generate_package_json = rule(
         ),
         "module_name": attr.string(mandatory = True),
         "description": attr.string(mandatory = True),
+        "license": attr.string(default = "MIT"),
         "_template": attr.label(
             default = Label("//tools:package.template.json"),
             allow_single_file = True,

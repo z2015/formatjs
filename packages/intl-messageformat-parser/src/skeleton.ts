@@ -1,5 +1,5 @@
 import {NumberSkeletonToken} from './types';
-import {UnifiedNumberFormatOptions} from '@formatjs/intl-unified-numberformat';
+import type {UnifiedNumberFormatOptions} from '@formatjs/intl-unified-numberformat';
 
 /**
  * https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table
@@ -313,7 +313,7 @@ export function convertNumberSkeletonToNumberFormatOptions(
         );
       }
       token.stem.replace(FRACTION_PRECISION_REGEX, function (
-        match: string,
+        _: string,
         g1: string,
         g2: string | number,
         g3: string,

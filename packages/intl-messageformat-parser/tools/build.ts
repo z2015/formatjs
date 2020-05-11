@@ -1,14 +1,16 @@
-#!/usr/bin/env node
-const peg = require('pegjs');
-const tspegjs = require('ts-pegjs');
-const fs = require('fs');
-const {outputFileSync} = require('fs-extra');
-const grammar = fs.readFileSync('./src/parser.pegjs', 'utf-8');
+import * as peg from 'pegjs';
+import * as tspegjs from 'ts-pegjs';
+import * as fs from 'fs';
+import {outputFileSync} from 'fs-extra';
+import * as minimist from 'minimist'
 
-// TS
+function main(args: Record<string, string>) {
+  const grammar = fs.readFileSync(args.in, 'utf-8');
+  
 const srcString = peg.generate(grammar, {
   plugins: [tspegjs],
   output: 'source',
+  format: 'commonjs',
   tspegjs: {
     customHeader: `
 import {
@@ -61,13 +63,20 @@ import {
 | TimeElement
 `,
   },
-});
+} as peg.OutputFormatAmdCommonjs);
 
 const REGEX = /ParseFunction = \((.*?)\) => (any);/g;
 const PARSE_EXPORT = /export const parse:/g;
 outputFileSync(
-  'src/parser.ts',
-  srcString
+  args.out,
+  "// @ts-nocheck\n" + srcString
     .replace(REGEX, 'ParseFunction = ($1) => MessageFormatElement[];')
     .replace(PARSE_EXPORT, 'export const pegParse:')
 );
+}
+
+
+
+if (require.main === module) {
+  main(minimist(process.argv))
+}
