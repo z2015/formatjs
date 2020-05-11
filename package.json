@@ -132,6 +132,7 @@
     "cldr-localenames-full": "^36.0.0",
     "cldr-misc-full": "^36.0.0",
     "cldr-numbers-full": "^36.0.0",
+    "cldr-units-full": "^36.0.0",
     "fs-extra": "^9.0.0",
     "glob": "^7.1.6",
     "jest": "^26.0.1",

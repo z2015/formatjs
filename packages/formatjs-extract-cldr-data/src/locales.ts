@@ -5,7 +5,7 @@
  */
 // These are the exceptions to the default algorithm for determining a locale's
 // parent locale.
-import * as AVAILABLE_LOCALES from 'cldr-core/availableLocales.json';
+const AVAILABLE_LOCALES = require('cldr-core/availableLocales.json');
 
 export function getAllLocales() {
   return AVAILABLE_LOCALES.availableLocales.full.sort();
@@ -13,6 +13,6 @@ export function getAllLocales() {
 
 export function getAllLanguages() {
   return new Set(
-    AVAILABLE_LOCALES.availableLocales.full.map(l => l.split('-')[0])
+    AVAILABLE_LOCALES.availableLocales.full.map((l: string) => l.split('-')[0])
   );
 }
