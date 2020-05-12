@@ -1,5 +1,5 @@
 import {NumberSkeletonToken} from './types';
-import type {UnifiedNumberFormatOptions} from '@formatjs/intl-unified-numberformat';
+import {UnifiedNumberFormatOptions} from '@formatjs/intl-unified-numberformat';
 
 /**
  * https://unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table

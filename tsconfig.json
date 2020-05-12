@@ -12,13 +12,12 @@
     "preserveConstEnums": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
-    "declarationMap": true,
     "sourceMap": true,
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@formatjs/intl-utils": ["packages/intl-utils/"],
-      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data/"]
+      "@formatjs/*": ["packages/*"],
+      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data/index.ts"]
     }
   },
 }

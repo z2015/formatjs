@@ -623,6 +623,9 @@ rollup_dts(
     srcs = [":lib"],
     out = "%s.d.ts" % PACKAGE_NAME,
     package_json = "package.json",
+    deps=[
+        "//packages/intl-utils:d-ts"
+    ]
 )
 
 # CLDR Data

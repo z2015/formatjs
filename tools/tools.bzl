@@ -58,7 +58,7 @@ def _rollup_dts(ctx):
         progress_message = "Copy api-extractor.json file to sandbox",
     )
 
-    inputs = ctx.files.srcs + [tsconfig, api_extractor_config] + ctx.files.package_json
+    inputs = depset(ctx.files.srcs + [tsconfig, api_extractor_config] + ctx.files.package_json, transitive=[t.files for t in ctx.attr.deps])
     args = ctx.actions.args()
     args.add("--config", api_extractor_config)
     ctx.actions.run(
@@ -80,6 +80,10 @@ rollup_dts = rule(
             allow_files = True,
             mandatory = True,
             doc = "List of src files",
+        ),
+        "deps": attr.label_list(
+            allow_files = True,
+            doc = "List of transitive deps",
         ),
         "package_json": attr.label(
             allow_single_file = True,

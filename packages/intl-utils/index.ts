@@ -1,4 +1,4 @@
-export {selectUnit} from './src/diff';
+export {selectUnit, Thresholds, Unit} from './src/diff';
 export {
   defaultNumberOption,
   getAliasesByLang,
@@ -24,6 +24,8 @@ export {
   supportedLocales,
   unpackData,
   isMissingLocaleDataError,
+  ResolveLocaleResult,
+  MissingLocaleDataError
 } from './src/resolve-locale';
 export * from './src/units';
 export * from './src/relative-time-types';
@@ -32,5 +34,6 @@ export * from './src/list-types';
 export * from './src/plural-rules-types';
 export * from './src/number-types';
 export * from './src/displaynames-types';
+export * from './src/types';
 export {getCanonicalLocales} from './src/get-canonical-locales';
 export {invariant} from './src/invariant';

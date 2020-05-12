@@ -1,7 +1,7 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
 load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("//tools:jest.bzl", "jest_test")
-load("//tools:tools.bzl", "generate_package_json")
+load("//tools:tools.bzl", "generate_package_json", "rollup_dts")
 load("@npm_bazel_rollup//:index.bzl", "rollup_bundle")
 load("@npm_bazel_terser//:index.bzl", "terser_minified")
 
@@ -11,6 +11,10 @@ SRCS = glob(["src/*.ts"]) + [
 ]
 
 PACKAGE_NAME = "intl-messageformat-parser"
+
+SRCS_DEPS = [
+    "//packages/intl-unified-numberformat:lib"
+]
 
 rollup_bundle(
     name = "bundle",
@@ -50,46 +54,18 @@ ts_library(
     devmode_module = "esnext",
     module_name = PACKAGE_NAME,
     prodmode_module = "esnext",
+    deps=SRCS_DEPS
 )
 
 # API Extractor
-genrule(
+rollup_dts(
     name = "d-ts",
-    srcs = [
-        ":lib",
-        "tsconfig.json",
-        "api-extractor.json",
-        "package.json",
-    ],
-    outs = [
-        "%s.d.ts" % PACKAGE_NAME,
-    ],
-    cmd = "$(location //tools:api-extractor) --config $(@D)/api-extractor.json",
-    tools = [
-        "//tools:api-extractor",
-    ],
-)
-
-genrule(
-    name = "api-extractor-copy",
-    srcs = [
-        "//:api-extractor.json",
-    ],
-    outs = [
-        "api-extractor.json",
-    ],
-    cmd = "cp -rf $< $@",
-)
-
-genrule(
-    name = "tsconfig-copy",
-    srcs = [
-        "//:tsconfig.json",
-    ],
-    outs = [
-        "tsconfig.json",
-    ],
-    cmd = "cp -rf $< $@",
+    srcs = [":lib"],
+    out = "%s.d.ts" % PACKAGE_NAME,
+    package_json = "package.json",
+    deps=[
+        "//packages/intl-unified-numberformat:d-ts"
+    ]
 )
 
 # Build the PEG parser
