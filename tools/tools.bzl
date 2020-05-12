@@ -40,32 +40,32 @@ def _rollup_dts(ctx):
     copy_tsconfig_args = ctx.actions.args()
     copy_tsconfig_args.add_all(ctx.files._tsconfig_json + [tsconfig])
     ctx.actions.run_shell(
-        outputs=[tsconfig],
-        inputs=ctx.files._tsconfig_json,
-        arguments=[copy_tsconfig_args],
-        command="cp -rf $1 $2",
-        progress_message="Copy tsconfig.json file to sandbox"
+        outputs = [tsconfig],
+        inputs = ctx.files._tsconfig_json,
+        arguments = [copy_tsconfig_args],
+        command = "cp -rf $1 $2",
+        progress_message = "Copy tsconfig.json file to sandbox",
     )
 
     api_extractor_config = ctx.actions.declare_file("api-extractor.json")
     copy_api_extractor_config_args = ctx.actions.args()
     copy_api_extractor_config_args.add_all(ctx.files._api_extractor_json + [api_extractor_config])
     ctx.actions.run_shell(
-        outputs=[api_extractor_config],
-        inputs=ctx.files._api_extractor_json,
-        arguments=[copy_api_extractor_config_args],
-        command="cp -rf $1 $2",
-        progress_message="Copy api-extractor.json file to sandbox"
+        outputs = [api_extractor_config],
+        inputs = ctx.files._api_extractor_json,
+        arguments = [copy_api_extractor_config_args],
+        command = "cp -rf $1 $2",
+        progress_message = "Copy api-extractor.json file to sandbox",
     )
 
     inputs = ctx.files.srcs + [tsconfig, api_extractor_config] + ctx.files.package_json
     args = ctx.actions.args()
-    args.add('--config', api_extractor_config)
+    args.add("--config", api_extractor_config)
     ctx.actions.run(
-        outputs=[ctx.outputs.out],
-        inputs=inputs,
-        arguments=[args],
-        executable=ctx.executable._api_extractor_bin
+        outputs = [ctx.outputs.out],
+        inputs = inputs,
+        arguments = [args],
+        executable = ctx.executable._api_extractor_bin,
     )
 
 rollup_dts = rule(
@@ -76,14 +76,14 @@ rollup_dts = rule(
             mandatory = True,
         ),
         "srcs": attr.label_list(
-            allow_empty=False,
-            allow_files=True,
-            mandatory=True,
-            doc="List of src files"
+            allow_empty = False,
+            allow_files = True,
+            mandatory = True,
+            doc = "List of src files",
         ),
         "package_json": attr.label(
             allow_single_file = True,
-            mandatory = True
+            mandatory = True,
         ),
         "_tsconfig_json": attr.label(
             default = Label("//:tsconfig.json"),
@@ -97,34 +97,6 @@ rollup_dts = rule(
             default = Label("//tools:api-extractor"),
             executable = True,
             cfg = "host",
-        )
-    }
-)
-
-def _compile_cldr(ctx):
-    output_dir = ctx.actions.declare_directory('locale-data')
-    args = ctx.actions.args()
-    args.add_all("--outDir", [output_dir])
-    ctx.actions.run(
-        outputs = [output_dir],
-        inputs = ctx.files.deps,
-        arguments = [args],
-        executable = ctx.executable.bin,
-    )
-
-compile_cldr = rule(
-    implementation = _compile_cldr,
-    attrs={
-        "bin": attr.label(
-            mandatory=True,
-            executable = True,
-            cfg = "host",
         ),
-        "deps": attr.label_list(
-            allow_empty=False,
-            allow_files=True,
-            mandatory=True,
-            doc="CLDR packages"
-        )
-    }
+    },
 )

@@ -11,7 +11,7 @@ export function getAllLocales() {
   return AVAILABLE_LOCALES.availableLocales.full.sort();
 }
 
-export function getAllLanguages() {
+export function getAllLanguages(): Set<string> {
   return new Set(
     AVAILABLE_LOCALES.availableLocales.full.map((l: string) => l.split('-')[0])
   );

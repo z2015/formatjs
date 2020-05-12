@@ -11,7 +11,7 @@ SRCS = [
 ] + glob(["src/*.ts"])
 
 SRCS_DEPS = [
-    "//packages/intl-utils:lib"
+    "//packages/intl-utils:lib",
 ]
 
 PACKAGE_NAME = "intl-unified-numberformat"
@@ -32,7 +32,7 @@ ts_library(
     devmode_module = "commonjs",
     module_name = "@formatjs/%s" % PACKAGE_NAME,
     prodmode_module = "commonjs",
-    deps=SRCS_DEPS
+    deps = SRCS_DEPS,
 )
 
 jest_test(
@@ -69,8 +69,8 @@ generate_package_json(
 
 # API Extractor
 rollup_dts(
-    name="d-ts",
-    out="%s.d.ts" % PACKAGE_NAME,
-    package_json="package.json",
-    srcs=[":lib"]
+    name = "d-ts",
+    srcs = [":lib"],
+    out = "%s.d.ts" % PACKAGE_NAME,
+    package_json = "package.json",
 )

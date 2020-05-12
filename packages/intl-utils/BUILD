@@ -65,10 +65,10 @@ jest_test(
 
 # API Extractor
 rollup_dts(
-    name="d-ts",
-    out="%s.d.ts" % PACKAGE_NAME,
-    package_json="package.json",
-    srcs=[":lib"]
+    name = "d-ts",
+    srcs = [":lib"],
+    out = "%s.d.ts" % PACKAGE_NAME,
+    package_json = "package.json",
 )
 
 # CLDR Aliases

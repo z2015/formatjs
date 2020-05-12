@@ -2,7 +2,9 @@ load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("//tools:jest.bzl", "jest_test")
 load("//tools:tools.bzl", "generate_package_json")
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
+
 package(default_visibility = ["//visibility:public"])
+
 SRCS = glob(["src/*.ts"]) + [
     "index.ts",
 ]
