@@ -236,8 +236,8 @@ pkg_npm(
         "LICENSE.md",
         "%s.d.ts" % PACKAGE_NAME,
         "package.json",
+        ":cldr-all-langs",
         ":lib",
-        ":cldr-all-langs"
     ],
 )
 
@@ -316,11 +316,11 @@ nodejs_binary(
     entry_point = "scripts/cldr.ts",
 )
 
-
 genrule(
-    name="cldr-all-langs",
+    name = "cldr-all-langs",
     outs = [
-        "dist/locale-data/%s.js" % lang for lang in LANGUAGES
+        "dist/locale-data/%s.js" % lang
+        for lang in LANGUAGES
     ] + ["polyfill-locales.js"],
     cmd = "$(location cldr-gen) --langs %s --outDir $(@D)/dist/locale-data --polyfillLocalesOut $(@D)/polyfill-locales.js" % ",".join(LANGUAGES),
     tools = [":cldr-gen"],
