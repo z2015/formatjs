@@ -1,44 +1,41 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
-load("@npm_bazel_typescript//:index.bzl", "ts_config", "ts_library")
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("//tools:jest.bzl", "jest_test")
 load("//tools:tools.bzl", "generate_package_json")
 
 package(default_visibility = ["//visibility:public"])
 
-SRCS = ["index.ts"] + glob(["src/*.ts"])
-
-SRC_DEPS = [
-    "@npm//@types/loader-utils",
-    "@npm//loader-utils",
-    "@npm//typescript",
+SRCS = glob(["src/*.ts"]) + [
+    "index.ts",
 ]
-PACKAGE_NAME = "ts-transformer"
+
+PACKAGE_NAME = "intl-format-cache"
 
 pkg_npm(
     name = PACKAGE_NAME,
-    srcs = [
+    deps = [
         "LICENSE.md",
-        
+        "package.json",
+        ":lib",
     ],
-    deps = [":lib", ":package.json"],
+)
+
+generate_package_json(
+    name = "generate-package-json",
+    out = "package.json",
+    description = "A memoizer factory for Intl format constructors.",
+    module_name = PACKAGE_NAME,
 )
 
 ts_library(
     name = "lib",
     srcs = SRCS,
     devmode_module = "esnext",
-    module_name = "@formatjs/%s" % PACKAGE_NAME,
+    module_name = PACKAGE_NAME,
     prodmode_module = "esnext",
-    deps = SRC_DEPS,
 )
 
-
-generate_package_json(
-    name = "generate-package-json",
-    out = "package.json",
-    description = "TS Compiler transformer for formatjs",
-    module_name = "@formatjs/%s" % PACKAGE_NAME,
-)
+# Tests
 
 jest_test(
     name = "test",
@@ -62,5 +59,5 @@ jest_test(
         "@npm//@jest/transform",
         "@npm//@types/jest",
         "@npm//ts-jest",
-    ] + SRC_DEPS,
+    ],
 )

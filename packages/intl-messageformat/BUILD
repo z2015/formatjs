@@ -8,14 +8,14 @@ load("@npm_bazel_terser//:index.bzl", "terser_minified")
 package(default_visibility = ["//visibility:public"])
 
 SRCS = glob(["src/*.ts"]) + [
-    "src/parser.ts",
     "index.ts",
 ]
 
-PACKAGE_NAME = "intl-messageformat-parser"
+PACKAGE_NAME = "intl-messageformat"
 
 SRCS_DEPS = [
-    "//packages/intl-unified-numberformat:lib"
+    "//packages/intl-messageformat-parser:lib",
+    "//packages/intl-format-cache:lib"
 ]
 
 rollup_bundle(
@@ -46,7 +46,7 @@ pkg_npm(
 generate_package_json(
     name = "generate-package-json",
     out = "package.json",
-    description = "Parses ICU Message strings into an AST via JavaScript.",
+    description = "Formats ICU Message strings with number, date, plural, and select placeholders to create localized messages.",
     module_name = PACKAGE_NAME,
 )
 
@@ -65,51 +65,6 @@ rollup_dts(
     srcs = [":lib"],
     out = "%s.d.ts" % PACKAGE_NAME,
     package_json = "package.json",
-    deps=[
-        "//packages/intl-unified-numberformat:d-ts"
-    ]
-)
-
-# Build the PEG parser
-
-ts_library(
-    name = "tools",
-    srcs = [
-        "tools/build.ts",
-        "tools/vendor.d.ts",
-    ],
-    devmode_module = "commonjs",
-    prodmode_module = "commonjs",
-    deps = [
-        "@npm//@types/fs-extra",
-        "@npm//@types/minimist",
-        "@npm//@types/node",
-        "@npm//@types/pegjs",
-        "@npm//fs-extra",
-        "@npm//minimist",
-        "@npm//pegjs",
-        "@npm//ts-pegjs",
-    ],
-)
-
-nodejs_binary(
-    name = "build_parser",
-    data = [
-        ":tools",
-    ],
-    entry_point = "tools/build.ts",
-)
-
-genrule(
-    name = "parser",
-    srcs = [
-        "src/parser.pegjs",
-    ],
-    outs = [
-        "src/parser.ts",
-    ],
-    cmd = "$(location build_parser) --in $< --out $@",
-    tools = [":build_parser"],
 )
 
 # Tests
