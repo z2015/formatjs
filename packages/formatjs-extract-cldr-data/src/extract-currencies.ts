@@ -12,8 +12,8 @@ import generateFieldExtractorFn, {
 import {sync as globSync} from 'glob';
 import {resolve, dirname} from 'path';
 import {CurrencyData, LDMLPluralRuleMap} from '@formatjs/intl-utils';
-type CurrenciesData = typeof import('cldr-numbers-full/main/en/currencies.json')
-const supplementalCurrencyData = require('cldr-core/supplemental/currencyData.json')
+type CurrenciesData = typeof import('cldr-numbers-full/main/en/currencies.json');
+const supplementalCurrencyData = require('cldr-core/supplemental/currencyData.json');
 const unitsLocales = globSync('*/currencies.json', {
   cwd: resolve(
     dirname(require.resolve('cldr-numbers-full/package.json')),

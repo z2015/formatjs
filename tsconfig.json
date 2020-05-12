@@ -17,7 +17,8 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@formatjs/intl-utils": ["packages/intl-utils/"]
+      "@formatjs/intl-utils": ["packages/intl-utils/"],
+      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data/"]
     }
   },
 }

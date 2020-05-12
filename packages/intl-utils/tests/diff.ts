@@ -61,79 +61,55 @@ describe('selectUnit', function () {
     });
   });
   it('should work for day', function () {
-    expect(
-      selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 6))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 6))).toEqual({
       value: -1,
       unit: 'day',
     });
-    expect(
-      selectUnit(new Date(2019, 1, 6), new Date(2019, 1, 5))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 6), new Date(2019, 1, 5))).toEqual({
       value: 1,
       unit: 'day',
     });
-    expect(
-      selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 9))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 9))).toEqual({
       value: -4,
       unit: 'day',
     });
-    expect(
-      selectUnit(new Date(2019, 1, 9), new Date(2019, 1, 5))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 9), new Date(2019, 1, 5))).toEqual({
       value: 4,
       unit: 'day',
     });
   });
   it('should work for week', function () {
-    expect(
-      selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 10))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 10))).toEqual({
       value: -1,
       unit: 'week',
     });
-    expect(
-      selectUnit(new Date(2019, 1, 10), new Date(2019, 1, 5))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 10), new Date(2019, 1, 5))).toEqual({
       value: 1,
       unit: 'week',
     });
-    expect(
-      selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 26))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 5), new Date(2019, 1, 26))).toEqual({
       value: -3,
       unit: 'week',
     });
-    expect(
-      selectUnit(new Date(2019, 1, 26), new Date(2019, 1, 5))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 26), new Date(2019, 1, 5))).toEqual({
       value: 3,
       unit: 'week',
     });
   });
   it('should work for month', function () {
-    expect(
-      selectUnit(new Date(2019, 1, 10), new Date(2019, 2, 10))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 1, 10), new Date(2019, 2, 10))).toEqual({
       value: -1,
       unit: 'month',
     });
-    expect(
-      selectUnit(new Date(2019, 2, 10), new Date(2019, 1, 10))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 2, 10), new Date(2019, 1, 10))).toEqual({
       value: 1,
       unit: 'month',
     });
-    expect(
-      selectUnit(new Date(2019, 0, 10), new Date(2019, 2, 27))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 0, 10), new Date(2019, 2, 27))).toEqual({
       value: -2,
       unit: 'month',
     });
-    expect(
-      selectUnit(new Date(2019, 2, 27), new Date(2019, 0, 5))
-    ).toEqual({
+    expect(selectUnit(new Date(2019, 2, 27), new Date(2019, 0, 5))).toEqual({
       value: 2,
       unit: 'month',
     });

@@ -1,8 +1,10 @@
 import {outputFileSync, readJSONSync} from 'fs-extra';
 import * as serialize from 'serialize-javascript';
-import * as minimist from 'minimist'
+import * as minimist from 'minimist';
 
-const aliases = readJSONSync(require.resolve('cldr-core/supplemental/aliases.json'))
+const aliases = readJSONSync(
+  require.resolve('cldr-core/supplemental/aliases.json')
+);
 
 const {languageAlias} = aliases.supplemental.metadata.alias;
 
@@ -28,5 +30,5 @@ function main(args: Record<string, string>) {
 }
 
 if (require.main === module) {
-  main(minimist(process.argv))
+  main(minimist(process.argv));
 }
