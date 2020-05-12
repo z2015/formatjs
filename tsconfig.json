@@ -14,11 +14,10 @@
     "noFallthroughCasesInSwitch": true,
     "declarationMap": true,
     "sourceMap": true,
-    "composite": true,
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@formatjs/*": ["packages/*"]
+      "@formatjs/intl-utils": ["packages/intl-utils/"]
     }
   },
 }

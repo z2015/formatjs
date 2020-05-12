@@ -1,33 +1,26 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
 load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("//tools:jest.bzl", "jest_test")
-load("//tools:tools.bzl", "generate_package_json")
-load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
+load("//tools:tools.bzl", "generate_package_json", "rollup_dts")
+
 package(default_visibility = ["//visibility:public"])
-SRCS = glob(["src/*.ts"]) + [
+
+SRCS = [
     "index.ts",
-]
+    "polyfill.ts",
+] + glob(["src/*.ts"])
 
 SRCS_DEPS = [
-    "//packages/intl-utils:lib",
-    "@npm//@types/glob",
-    "@npm//@types/lodash",
-    "@npm//@types/node",
-    "@npm//cldr-core",
-    "@npm//cldr-dates-full",
-    "@npm//cldr-localenames-full",
-    "@npm//cldr-misc-full",
-    "@npm//cldr-numbers-full",
-    "@npm//cldr-units-full",
-    "@npm//glob",
-    "@npm//lodash",
+    "//packages/intl-utils:lib"
 ]
 
-PACKAGE_NAME = "formatjs-extract-cldr-data"
+PACKAGE_NAME = "intl-unified-numberformat"
 
 pkg_npm(
     name = PACKAGE_NAME,
     deps = [
         "LICENSE.md",
+        "%s.d.ts" % PACKAGE_NAME,
         "package.json",
         ":lib",
     ],
@@ -37,16 +30,9 @@ ts_library(
     name = "lib",
     srcs = SRCS,
     devmode_module = "commonjs",
-    module_name = PACKAGE_NAME,
+    module_name = "@formatjs/%s" % PACKAGE_NAME,
     prodmode_module = "commonjs",
-    deps = SRCS_DEPS,
-)
-
-generate_package_json(
-    name = "generate-package-json",
-    out = "package.json",
-    description = "Utility library that extracts the CLDR data that's needed by the FormatJS libraries.",
-    module_name = PACKAGE_NAME,
+    deps=SRCS_DEPS
 )
 
 jest_test(
@@ -72,4 +58,19 @@ jest_test(
         "@npm//@types/jest",
         "@npm//ts-jest",
     ] + SRCS_DEPS,
+)
+
+generate_package_json(
+    name = "generate-package-json",
+    out = "package.json",
+    description = "Polyfill for Intl.NumberFormat ES2020",
+    module_name = "@formatjs/%s" % PACKAGE_NAME,
+)
+
+# API Extractor
+rollup_dts(
+    name="d-ts",
+    out="%s.d.ts" % PACKAGE_NAME,
+    package_json="package.json",
+    srcs=[":lib"]
 )

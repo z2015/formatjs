@@ -1,4 +1,4 @@
-import {PluralRules} from './core';
+import {PluralRules} from './src/core';
 
 if (
   typeof Intl.PluralRules === 'undefined' ||

@@ -1,17 +1,20 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
 load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("//tools:jest.bzl", "jest_test")
-load("//tools:tools.bzl", "generate_package_json", "rollup_dts")
+load("//tools:tools.bzl", "generate_package_json", "rollup_dts", "compile_cldr")
 
 package(default_visibility = ["//visibility:public"])
 
 SRCS = [
     "index.ts",
-    "src/aliases.ts",
-    "src/parentLocales.ts",
+    "polyfill.ts",
 ] + glob(["src/*.ts"])
 
-PACKAGE_NAME = "intl-utils"
+SRCS_DEPS = [
+    "//packages/intl-utils:lib"
+]
+
+PACKAGE_NAME = "intl-pluralrules"
 
 pkg_npm(
     name = PACKAGE_NAME,
@@ -29,13 +32,7 @@ ts_library(
     devmode_module = "commonjs",
     module_name = "@formatjs/%s" % PACKAGE_NAME,
     prodmode_module = "commonjs",
-)
-
-generate_package_json(
-    name = "generate-package-json",
-    out = "package.json",
-    description = "Utils for formatjs",
-    module_name = "@formatjs/%s" % PACKAGE_NAME,
+    deps=SRCS_DEPS
 )
 
 jest_test(
@@ -60,7 +57,14 @@ jest_test(
         "@npm//@jest/transform",
         "@npm//@types/jest",
         "@npm//ts-jest",
-    ],
+    ] + SRCS_DEPS,
+)
+
+generate_package_json(
+    name = "generate-package-json",
+    out = "package.json",
+    description = "Polyfill for Intl.PluralRules",
+    module_name = "@formatjs/%s" % PACKAGE_NAME,
 )
 
 # API Extractor
@@ -71,74 +75,35 @@ rollup_dts(
     srcs=[":lib"]
 )
 
-# CLDR Aliases
-
 ts_library(
-    name = "aliases-lib",
-    srcs = [
-        "scripts/aliases.ts",
-    ],
+    name="cldr-gen-lib",
+    srcs=["scripts/cldr.ts"],
     devmode_module = "commonjs",
     prodmode_module = "commonjs",
-    deps = [
-        "@npm//@types/fs-extra",
-        "@npm//@types/minimist",
-        "@npm//@types/node",
-        "@npm//@types/serialize-javascript",
-        "@npm//cldr-core",
-        "@npm//fs-extra",
+    deps=[
         "@npm//minimist",
+        "@npm//@types/minimist",
+        "//packages/formatjs-extract-cldr-data:lib",
+        "@npm//@types/node",
+        "@npm//@types/fs-extra",
+        "@npm//@types/serialize-javascript",
+        "@npm//fs-extra",
         "@npm//serialize-javascript",
-    ],
+        "@npm//make-plural-compiler",
+        "@npm//cldr-core"
+    ]
 )
 
 nodejs_binary(
-    name = "aliases-bin",
-    data = [":aliases-lib"],
-    entry_point = ":scripts/aliases.ts",
+    name="cldr-gen",
+    entry_point="scripts/cldr.ts",
+    data=[":cldr-gen-lib"]
 )
 
-genrule(
-    name = "aliases",
-    outs = [
-        "src/aliases.ts",
-    ],
-    cmd = "$(location aliases-bin) --out $@",
-    tools = [":aliases-bin"],
-)
-
-# CLDR Parent Locales
-
-ts_library(
-    name = "parentLocales-lib",
-    srcs = [
-        "scripts/parentLocales.ts",
-    ],
-    devmode_module = "commonjs",
-    prodmode_module = "commonjs",
-    deps = [
-        "@npm//@types/fs-extra",
-        "@npm//@types/minimist",
-        "@npm//@types/node",
-        "@npm//@types/serialize-javascript",
-        "@npm//cldr-core",
-        "@npm//fs-extra",
-        "@npm//minimist",
-        "@npm//serialize-javascript",
-    ],
-)
-
-nodejs_binary(
-    name = "parentLocales-bin",
-    data = [":parentLocales-lib"],
-    entry_point = ":scripts/parentLocales.ts",
-)
-
-genrule(
-    name = "parentLocales",
-    outs = [
-        "src/parentLocales.ts",
-    ],
-    cmd = "$(location parentLocales-bin) --out $@",
-    tools = [":parentLocales-bin"],
+compile_cldr(
+    name="compile-cldr",
+    bin=":cldr-gen",
+    deps=[
+        ":cldr-gen-lib"
+    ]
 )
