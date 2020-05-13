@@ -18,8 +18,8 @@ pkg_npm(
     deps = [
         "//tools:LICENSE.md",
         "%s.d.ts" % PACKAGE_NAME,
-        ":package.json",
         ":lib",
+        ":package.json",
     ],
 )
 

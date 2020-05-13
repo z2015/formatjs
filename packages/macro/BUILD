@@ -1,13 +1,18 @@
 load("@npm_bazel_typescript//:index.bzl", "ts_library")
 load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm")
 load("//tools:tools.bzl", "generate_package_json")
+
 package(default_visibility = ["//visibility:public"])
 
 PACKAGE_NAME = "macro"
 
 pkg_npm(
     name = PACKAGE_NAME,
-    deps = [":lib","//tools:LICENSE.md",":package.json",],
+    deps = [
+        ":lib",
+        ":package.json",
+        "//tools:LICENSE.md",
+    ],
 )
 
 ts_library(

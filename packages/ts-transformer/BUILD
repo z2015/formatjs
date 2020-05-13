@@ -20,7 +20,7 @@ pkg_npm(
     deps = [
         ":lib",
         ":package.json",
-        "//tools:LICENSE.md"
+        "//tools:LICENSE.md",
     ],
 )
 

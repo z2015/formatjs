@@ -10,7 +10,7 @@ import {
   getParentLocalesByLang,
 } from '../../intl-utils';
 import * as minimist from 'minimist';
-import * as assert from 'assert'
+import * as assert from 'assert';
 
 const data = extractAllRelativeFields();
 const langData = getAllDateFieldsLocales().reduce(
@@ -43,22 +43,23 @@ const langData = getAllDateFieldsLocales().reduce(
 
 function main(args: minimist.ParsedArgs) {
   const {outDir, polyfillLocalesOut} = args;
-  const langs: string[] = args.langs.split(',')
-  assert(langs.length === Object.keys(langData).length, 'Mismatch langs')
+  const langs: string[] = args.langs.split(',');
+  assert(langs.length === Object.keys(langData).length, 'Mismatch langs');
   for (const lang of langs) {
-    assert(lang in langData, `We don't have data for ${lang}`)
+    assert(lang in langData, `We don't have data for ${lang}`);
   }
   // Dist all locale files to dist/locale-data
   return Promise.all(
     langs
-      .map(lang => outputFile(
+      .map(lang =>
+        outputFile(
           join(outDir, lang + '.js'),
           `/* @generated */	
 if (Intl.RelativeTimeFormat && typeof Intl.RelativeTimeFormat.__addLocaleData === 'function') {
   Intl.RelativeTimeFormat.__addLocaleData(${JSON.stringify(langData[lang])})
 }`
-        
-      ))
+        )
+      )
       .concat([
         outputFile(
           polyfillLocalesOut,
@@ -67,9 +68,7 @@ if (Intl.RelativeTimeFormat && typeof Intl.RelativeTimeFormat.__addLocaleData ==
 require('./polyfill')
 if (Intl.RelativeTimeFormat && typeof Intl.RelativeTimeFormat.__addLocaleData === 'function') {
   Intl.RelativeTimeFormat.__addLocaleData(
-${langs
-  .map(lang => JSON.stringify(langData[lang]))
-  .join(',\n')}
+${langs.map(lang => JSON.stringify(langData[lang])).join(',\n')}
   )
 }
 `

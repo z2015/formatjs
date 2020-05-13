@@ -14,8 +14,8 @@ PACKAGE_NAME = "intl-locales-supported"
 pkg_npm(
     name = PACKAGE_NAME,
     deps = [
-        "//tools:LICENSE.md",
         ":package.json",
+        "//tools:LICENSE.md",
     ],
 )
 

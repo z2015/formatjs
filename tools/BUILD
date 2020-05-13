@@ -38,4 +38,7 @@ nodejs_binary(
     entry_point = "generate-package-json.ts",
 )
 
-exports_files(["package.template.json", "LICENSE.md"])
+exports_files([
+    "package.template.json",
+    "LICENSE.md",
+])
