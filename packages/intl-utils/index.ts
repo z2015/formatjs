@@ -25,7 +25,7 @@ export {
   unpackData,
   isMissingLocaleDataError,
   ResolveLocaleResult,
-  MissingLocaleDataError
+  MissingLocaleDataError,
 } from './src/resolve-locale';
 export * from './src/units';
 export * from './src/relative-time-types';

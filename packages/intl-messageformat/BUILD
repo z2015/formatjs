@@ -15,7 +15,7 @@ PACKAGE_NAME = "intl-messageformat"
 
 SRCS_DEPS = [
     "//packages/intl-messageformat-parser:lib",
-    "//packages/intl-format-cache:lib"
+    "//packages/intl-format-cache:lib",
 ]
 
 rollup_bundle(
@@ -56,7 +56,7 @@ ts_library(
     devmode_module = "esnext",
     module_name = PACKAGE_NAME,
     prodmode_module = "esnext",
-    deps=SRCS_DEPS
+    deps = SRCS_DEPS,
 )
 
 # API Extractor

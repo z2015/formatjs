@@ -2,7 +2,7 @@
 'use strict';
 import {Suite} from 'benchmark';
 const memoize = require('fast-memoize');
-import memoizeIntl from "..";
+import memoizeIntl from '..';
 import IntlMessageFormat from 'intl-messageformat';
 
 function onCycle(ev: any) {

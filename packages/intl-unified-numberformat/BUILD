@@ -568,7 +568,7 @@ PACKAGE_NAME = "intl-unified-numberformat"
 pkg_npm(
     name = PACKAGE_NAME,
     deps = [
-        "LICENSE.md",
+        "//tools:LICENSE.md",
         "%s.d.ts" % PACKAGE_NAME,
         "package.json",
         ":cldr-all-locales",
@@ -623,9 +623,9 @@ rollup_dts(
     srcs = [":lib"],
     out = "%s.d.ts" % PACKAGE_NAME,
     package_json = "package.json",
-    deps=[
-        "//packages/intl-utils:d-ts"
-    ]
+    deps = [
+        "//packages/intl-utils:d-ts",
+    ],
 )
 
 # CLDR Data

@@ -17,9 +17,9 @@
     "baseUrl": ".",
     "paths": {
       "@formatjs/*": ["packages/*"],
-      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data/index.ts"],
-      "intl-messageformat-parser": ["packages/intl-messageformat-parser/index.ts"],
-      "intl-messageformat": ["packages/intl-messageformat/index.ts"]
+      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data/"],
+      "intl-messageformat-parser": ["packages/intl-messageformat-parser/"],
+      "intl-messageformat": ["packages/intl-messageformat/"]
     }
   },
 }

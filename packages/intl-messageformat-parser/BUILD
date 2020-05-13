@@ -15,7 +15,7 @@ SRCS = glob(["src/*.ts"]) + [
 PACKAGE_NAME = "intl-messageformat-parser"
 
 SRCS_DEPS = [
-    "//packages/intl-unified-numberformat:lib"
+    "//packages/intl-unified-numberformat:lib",
 ]
 
 rollup_bundle(
@@ -56,7 +56,7 @@ ts_library(
     devmode_module = "esnext",
     module_name = PACKAGE_NAME,
     prodmode_module = "esnext",
-    deps=SRCS_DEPS
+    deps = SRCS_DEPS,
 )
 
 # API Extractor
@@ -65,9 +65,9 @@ rollup_dts(
     srcs = [":lib"],
     out = "%s.d.ts" % PACKAGE_NAME,
     package_json = "package.json",
-    deps=[
-        "//packages/intl-unified-numberformat:d-ts"
-    ]
+    deps = [
+        "//packages/intl-unified-numberformat:d-ts",
+    ],
 )
 
 # Build the PEG parser

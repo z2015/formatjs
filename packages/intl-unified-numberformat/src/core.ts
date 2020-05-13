@@ -176,7 +176,8 @@ export interface UnifiedNumberFormatPart {
   value: string;
 }
 
-export interface UnifiedNumberFormatInternal extends NumberFormatDigitInternalSlots {
+export interface UnifiedNumberFormatInternal
+  extends NumberFormatDigitInternalSlots {
   locale: string;
   dataLocale: string;
   style: NonNullable<UnifiedNumberFormatOptions['style']>;

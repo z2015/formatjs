@@ -58,7 +58,7 @@ def _rollup_dts(ctx):
         progress_message = "Copy api-extractor.json file to sandbox",
     )
 
-    inputs = depset(ctx.files.srcs + [tsconfig, api_extractor_config] + ctx.files.package_json, transitive=[t.files for t in ctx.attr.deps])
+    inputs = depset(ctx.files.srcs + [tsconfig, api_extractor_config] + ctx.files.package_json, transitive = [t.files for t in ctx.attr.deps])
     args = ctx.actions.args()
     args.add("--config", api_extractor_config)
     ctx.actions.run(

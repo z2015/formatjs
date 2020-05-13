@@ -16,9 +16,9 @@ PACKAGE_NAME = "intl-utils"
 pkg_npm(
     name = PACKAGE_NAME,
     deps = [
-        "LICENSE.md",
+        "//tools:LICENSE.md",
         "%s.d.ts" % PACKAGE_NAME,
-        "package.json",
+        ":package.json",
         ":lib",
     ],
 )
