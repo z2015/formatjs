@@ -17,7 +17,7 @@ pkg_npm(
 
 ts_library(
     name = "lib",
-    srcs = glob(["index.ts"]),
+    srcs = ["index.ts"],
     devmode_module = "commonjs",
     module_name = "@formatjs/%s" % PACKAGE_NAME,
     prodmode_module = "commonjs",
