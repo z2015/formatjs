@@ -44,8 +44,6 @@ ts_project(
     srcs = SRCS,
     source_map=True,
     declaration=True,
-    declaration_map=True,
-    composite=True,
     deps = SRCS_DEPS,
 )
 

@@ -12,7 +12,6 @@
     "preserveConstEnums": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
-    "declarationMap": true,
     "sourceMap": true,
     "jsx": "react",
     "baseUrl": ".",

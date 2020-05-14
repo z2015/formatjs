@@ -9,20 +9,18 @@ PACKAGE_NAME = "macro"
 pkg_npm(
     name = PACKAGE_NAME,
     deps = [
-        ":tsconfig",
         ":package.json",
+        ":tsconfig",
         "//tools:LICENSE.md",
     ],
 )
 
 ts_project(
     name = "tsconfig",
-    extends=["//:tsconfig.json"],
     srcs = ["index.ts"],
-    source_map=True,
-    declaration=True,
-    declaration_map=True,
-    composite=True,
+    declaration = True,
+    extends = ["//:tsconfig.json"],
+    source_map = True,
 )
 
 generate_package_json(
