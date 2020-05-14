@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDirs": [
+      ".",
+      "../../bazel-out/darwin-fastbuild/bin/packages/intl-utils",
+      "../../bazel-out/k8-fastbuild/bin/packages/intl-utils",
+      "../../bazel-out/x64_windows-fastbuild/bin/packages/intl-utils",
+      "../../bazel-out/darwin-dbg/bin/packages/intl-utils",
+      "../../bazel-out/k8-dbg/bin/packages/intl-utils",
+      "../../bazel-out/x64_windows-dbg/bin/packages/intl-utils"
+  ]
+  },
+}
