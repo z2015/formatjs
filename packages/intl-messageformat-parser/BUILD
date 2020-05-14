@@ -61,7 +61,6 @@ ts_library(
     srcs = SRCS,
     devmode_module = "esnext",
     module_name = PACKAGE_NAME,
-    prodmode_module = "esnext",
     deps = SRCS_DEPS,
 )
 
