@@ -1,4 +1,4 @@
-load("@npm_bazel_typescript//:index.bzl", "ts_library")
+load("@npm_bazel_typescript//:index.bzl", "ts_project")
 load("@build_bazel_rules_nodejs//:index.bzl", "pkg_npm")
 load("//tools:tools.bzl", "generate_package_json")
 
@@ -9,18 +9,20 @@ PACKAGE_NAME = "macro"
 pkg_npm(
     name = PACKAGE_NAME,
     deps = [
-        ":lib",
+        ":tsconfig",
         ":package.json",
         "//tools:LICENSE.md",
     ],
 )
 
-ts_library(
-    name = "lib",
+ts_project(
+    name = "tsconfig",
+    extends=["//:tsconfig.json"],
     srcs = ["index.ts"],
-    devmode_module = "commonjs",
-    module_name = "@formatjs/%s" % PACKAGE_NAME,
-    prodmode_module = "commonjs",
+    source_map=True,
+    declaration=True,
+    declaration_map=True,
+    composite=True,
 )
 
 generate_package_json(
