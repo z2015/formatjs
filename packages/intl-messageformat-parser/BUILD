@@ -1,5 +1,5 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
-load("@npm_bazel_typescript//:index.bzl", "ts_library")
+load("@npm_bazel_typescript//:index.bzl", "ts_config", "ts_library")
 load("//tools:jest.bzl", "jest_test")
 load("//tools:tools.bzl", "generate_package_json", "rollup_dts")
 load("@npm_bazel_rollup//:index.bzl", "rollup_bundle")
@@ -17,6 +17,12 @@ PACKAGE_NAME = "intl-messageformat-parser"
 SRCS_DEPS = [
     "//packages/intl-unified-numberformat:lib",
 ]
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = ["//:tsconfig.json"],
+)
 
 rollup_bundle(
     name = "bundle",
@@ -117,7 +123,7 @@ genrule(
 jest_test(
     name = "test",
     srcs = [
-        "//:tsconfig.json",
+        "tsconfig.json",
     ] + SRCS + glob([
         "tests/**/*.ts",
         "tests/**/*.tsx",
@@ -133,6 +139,7 @@ jest_test(
         "no-bazelci-mac",
     ],
     deps = [
+        "//:tsconfig.json",
         "@npm//@jest/transform",
         "@npm//@types/jest",
         "@npm//ts-jest",

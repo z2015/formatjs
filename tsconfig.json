@@ -12,14 +12,17 @@
     "preserveConstEnums": true,
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
+    "composite": true,
+    "declarationMap": true,
+    "incremental": true,
     "sourceMap": true,
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
       "@formatjs/*": ["packages/*"],
-      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data/"],
-      "intl-messageformat-parser": ["packages/intl-messageformat-parser/"],
-      "intl-messageformat": ["packages/intl-messageformat/"]
+      "formatjs-extract-cldr-data": ["packages/formatjs-extract-cldr-data"],
+      "intl-messageformat-parser": ["packages/intl-messageformat-parser"],
+      "intl-messageformat": ["packages/intl-messageformat"]
     }
   },
 }

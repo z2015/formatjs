@@ -1,5 +1,5 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
-load("@npm_bazel_typescript//:index.bzl", "ts_library")
+load("@npm_bazel_typescript//:index.bzl", "ts_config", "ts_library")
 load("//tools:jest.bzl", "jest_test")
 load("//tools:tools.bzl", "generate_package_json", "rollup_dts")
 
@@ -12,6 +12,12 @@ SRCS = [
 ] + glob(["src/*.ts"])
 
 PACKAGE_NAME = "intl-utils"
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = ["//:tsconfig.json"],
+)
 
 pkg_npm(
     name = PACKAGE_NAME,
@@ -41,7 +47,7 @@ generate_package_json(
 jest_test(
     name = "test",
     srcs = [
-        "//:tsconfig.json",
+        "tsconfig.json",
     ] + SRCS + glob([
         "tests/**/*.ts",
         "tests/**/*.tsx",

@@ -1,5 +1,5 @@
 load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary", "pkg_npm")
-load("@npm_bazel_typescript//:index.bzl", "ts_library")
+load("@npm_bazel_typescript//:index.bzl", "ts_config", "ts_library")
 load("//tools:jest.bzl", "jest_test")
 load("//tools:tools.bzl", "generate_package_json", "rollup_dts")
 
@@ -550,6 +550,12 @@ LOCALES = [
     "zu",
 ]
 
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = ["//:tsconfig.json"],
+)
+
 SRCS = [
     "index.ts",
     "polyfill.ts",
@@ -588,7 +594,7 @@ ts_library(
 jest_test(
     name = "test",
     srcs = [
-        "//:tsconfig.json",
+        "tsconfig.json",
     ] + SRCS + glob([
         "tests/**/*.ts",
         "tests/**/*.tsx",
